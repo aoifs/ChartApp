@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="distance.formula.DistanceController">
+   <top>
+      <TextArea minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="600.0" style="-fx-border-color: cyan; -fx-border-radius: 1; -fx-border-width: 4;" text="       &#10;&#10;&#10;                   Calculate distance using equation S=UT+(1/2)AT^2&#10;                          S - Distance  &#10;                               U - Initial velocity&#10;                                     T - Time&#10;                                           A - Acceleration" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Calibri Bold Italic" size="20.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </TextArea>
+   </top>
+   <bottom>
+      <HBox prefHeight="70.0" prefWidth="600.0" style="-fx-opacity: .99;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="uValue" prefHeight="48.0" prefWidth="185.0" promptText="Enter U" style="-fx-background-color: lightsalmon;" />
+            <TextField fx:id="tValue" prefHeight="48.0" prefWidth="175.0" promptText="Enter T" style="-fx-background-color: gold;" />
+            <TextField fx:id="aValue" prefHeight="48.0" prefWidth="169.0" promptText="Enter A" style="-fx-background-color: chartreuse;">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font></TextField>
+            <Button mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="49.0" prefWidth="195.0" text="Calculate distance" textFill="#1131d1" />
+            <TextFlow opacity="0.76" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="result" onAction="#handleButtonAction" prefHeight="48.0" prefWidth="132.0" style="-fx-background-color: violet;" />
+               </children></TextFlow>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
