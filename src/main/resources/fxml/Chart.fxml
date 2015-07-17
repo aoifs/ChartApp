@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="distance.formula.ChartController">
+   <bottom>
+      <HBox prefHeight="52.0" prefWidth="600.0" style="-fx-opacity: .99;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="X" prefHeight="47.0" prefWidth="137.0" style="-fx-region-background: text=" text="   Y=" />
+            <TextField fx:id="enterX" prefHeight="47.0" prefWidth="157.0" promptText="Enter x" style="-fx-background-color: steelblue;">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font></TextField>
+            <Label fx:id="Y" prefHeight="47.0" prefWidth="111.0" text="  X" />
+            <Label fx:id="plus" prefHeight="48.0" prefWidth="137.0" text="      +" />
+            <TextField fx:id="C" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="84.0" promptText="C" style="-fx-background-color: steelblue;" />
+            <Button mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="49.0" prefWidth="166.0" text="Plot Graph" textFill="#1131d1" />
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <LineChart fx:id="graph" BorderPane.alignment="CENTER">
+        <xAxis>
+          <NumberAxis label="xAxis" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="yAxis" side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </center>
+   <right>
+      <TableView fx:id="table" prefHeight="348.0" prefWidth="152.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="X" fx:id="xColumn" />
+          <TableColumn fx:id="yColumn" prefWidth="75.0" text="Y" />
+        </columns>
+      </TableView>
+   </right>
+</BorderPane>
