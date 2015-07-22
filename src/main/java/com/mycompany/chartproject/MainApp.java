@@ -19,9 +19,9 @@ import org.apache.poi.ss.usermodel.DateUtil;
 
 public class MainApp extends Application {
 
-    @Override
+   @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/PieChart.fxml"));
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
@@ -39,9 +39,10 @@ public class MainApp extends Application {
      *
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException { 
         launch(args);
-
+    }
+}
         /*XSSFWorkbook workbook = new XSSFWorkbook();
          XSSFSheet sheet = workbook.createSheet("Sample sheet");
  
@@ -83,82 +84,118 @@ public class MainApp extends Application {
          e.printStackTrace();
          }
          }
-         }  */
-        /*   try {
-     
-         String test = "src/main/resources/Test.xlsx";
-         FileInputStream file = new FileInputStream(new File(test));
-     
-         //Get the workbook instance for XLS file 
-         XSSFWorkbook workbook = new XSSFWorkbook(file);
- 
-         //Get first sheet from the workbook
-         XSSFSheet sheet = workbook.getSheetAt(0);
-     
-         //Iterate through each rows from first sheet
-         Iterator<Row> rowIterator = sheet.iterator();
-         while(rowIterator.hasNext()) {
-         Row row = rowIterator.next();
-    
-         //For each row, iterate through each columns
-         Iterator<Cell> cellIterator = row.cellIterator();
-      
-       
-         while(cellIterator.hasNext()) {
-             
-         Cell cell = cellIterator.next();
+         } }} */
         
-         switch(cell.getCellType()) {
-                
-         case Cell.CELL_TYPE_NUMERIC:
-                   
-         if  (DateUtil.isCellDateFormatted(cell)) {
           
-         System.out.println(cell.getDateCellValue()+ "\t\t" ) ;
+    
+    
+  /* try {
+
+            String test = "src/main/resources/Stability.xlsx";
+            FileInputStream file = new FileInputStream(new File(test));
+
+            //Get the workbook instance for XLS file 
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+            //Get first sheet from the workbook
+            XSSFSheet sheet = workbook.getSheetAt(0);
+
+            //Iterate through each rows from first sheet
+            Iterator<Row> rowIterator = sheet.iterator();
+            int total=-1;
+            int success=0;
+            int failure=0;
+            int unstable=0;
            
-            
-         }
-                  
-                   
-    
-         else{
-         System.out.print(cell.getNumericCellValue() + "\t\t");
+            while (rowIterator.hasNext()) {
+                ++total;
+                Row row = rowIterator.next();
+
+                //For each row, iterate through each columns
+                Iterator<Cell> cellIterator = row.cellIterator();
+
+                while (cellIterator.hasNext()) {
+
+                    Cell cell = cellIterator.next();
+
+                    switch (cell.getCellType()) {
+
+                        case Cell.CELL_TYPE_NUMERIC:
+
+                            if (DateUtil.isCellDateFormatted(cell)) {
+
+                                System.out.println(cell.getDateCellValue() + "\t\t");
+
+                            } else {
+                                System.out.print(cell.getNumericCellValue() + "\t\t");
+
+                            }
+                            break;
+                        case Cell.CELL_TYPE_BOOLEAN:
+                            System.out.print(cell.getBooleanCellValue() + "\t\t");
+                            break;
+
+                        case Cell.CELL_TYPE_STRING:
+                            if(cell.getStringCellValue().equalsIgnoreCase("SUCCESS")){
+                                ++success; 
+                            }
+                            else if(cell.getStringCellValue().equalsIgnoreCase("FAILURE")){
+                                ++failure;
+                            }
+                            else if (cell.getStringCellValue().equalsIgnoreCase("UNSTABLE")){
+                                ++unstable;
+                         
+                        }
+                            System.out.print(cell.getStringCellValue() + "\t\t");
+                            break;
+ 
+                    
+                    }
+           
+                    
+            }
+                System.out.println("");
          
-                       
-        
-          
-          
-         }
-         break;
-         case Cell.CELL_TYPE_BOOLEAN:
-         System.out.print(cell.getBooleanCellValue() + "\t\t");
-         break;
-               
-         case Cell.CELL_TYPE_STRING:
-         System.out.print(cell.getStringCellValue() + "\t\t");
-         break;
-                    
-                    
-         }
+            file.close();
+            FileOutputStream out
+                    = new FileOutputStream(new File("Stability.xls"));
+            workbook.write(out);
+            out.close();
+                
+            }
+           
+             System.out.println("Total " + total);
+             System.out.println("Success " + success);
+             System.out.println("Failure " + failure);
+             System.out.println("Unstable " + unstable);
+             
+            int green=((success * 100 / total));
+            double Passed = (double) green / 100;
+            System.out.println("Passed: "+ Passed );
+              
+            int red=((failure * 100 / total));
+            double Failed = (double) red / 100;
+            System.out.println("Failed: "+ Failed);
             
-         }
-         System.out.println("");
-         }
-         file.close();
-         FileOutputStream out = 
-         new FileOutputStream(new File(test));
-         workbook.write(out);
-         out.close();
-     
-         } catch (FileNotFoundException e) {
-         e.printStackTrace();
-         } catch (IOException e) {
-         e.printStackTrace();
-         }
+              
+            int orange=((unstable * 100 / total));
+            double Unstable = (double) orange / 100;
+            System.out.println("Unstable: "+ Unstable);
+            
+         
+           
+         
+          
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+         
+            
    
-         }
-    
-         } 
-         */
+   
     }
-}
+}        */
+        

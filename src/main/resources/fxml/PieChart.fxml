@@ -10,8 +10,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="distance.formula.PieChart">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.chartproject.PieChartController">
    <center>
       <PieChart fx:id="pieChart" prefHeight="271.0" prefWidth="600.0" title="PieChart" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <HBox prefHeight="26.0" prefWidth="587.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="wfmac" mnemonicParsing="false" onAction="#handleRepoChange1" prefHeight="25.0" prefWidth="299.0" text="apWorkflowMacro" textFill="#121fd3" />
+            <Button fx:id="servcore" mnemonicParsing="false" onAction="#handleRepoChange2" prefHeight="25.0" prefWidth="300.0" text="apServiceCore" textFill="#0a1ef5" />
+<!--            <Button fx:id="wfmsr" mnemonicParsing="false" onAction="#handleRepoChange3" prefHeight="25.0" prefWidth="150.0" text="apWorkflow-msrbsv1" textFill="#2912bf" />
+            <Button fx:id="modelmsr" mnemonicParsing="false" onAction="#handleRepoChange4" prefHeight="25.0" prefWidth="151.0" text="apModel-msrbsv1" textFill="#480be3" />-->
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

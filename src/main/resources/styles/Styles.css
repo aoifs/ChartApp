@@ -1,3 +1,11 @@
 .button {
     -fx-font-weight: bold;
 }
+.default-color0.chart-pie { -fx-pie-color:  red; }
+.default-color1.chart-pie { -fx-pie-color: orange; }
+.default-color2.chart-pie { -fx-pie-color: lawngreen; }
+.default-color3.chart-pie { -fx-pie-color: dodgerblue; }
+.default-color4.chart-pie { -fx-pie-color:  red; }
+.default-color5.chart-pie { -fx-pie-color: orange; }
+.default-color6.chart-pie { -fx-pie-color: lawngreen; }
+.default-color7.chart-pie { -fx-pie-color: dodgerblue; }
