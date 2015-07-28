@@ -12,16 +12,22 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.Reflection;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  *
@@ -42,14 +48,9 @@ public class PieChartController implements Initializable {
     
             
             ExcelReader excelReader = new ExcelReader();
+    private Object data;
 
-    /* @FXML
-     private Label green;
-     @FXML
-     private Label orange;
-     @FXML
-     private Label red;
-     */
+    
     //method linked to the view
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,7 +70,7 @@ public class PieChartController implements Initializable {
         setPieChartData("apservicecore_acceptance");
     
     }
-     @FXML 
+      /* @FXML 
     public void handleRepoChange3 () {
 
         setPieChartData("ap-workflow-msrbsv1_acceptance");
@@ -80,14 +81,15 @@ public class PieChartController implements Initializable {
 
         setPieChartData("ap-model-msrbsv1_acceptance");
     
-    }
+    }  */
             
     private void setPieChartData(String repo) {
         // TODO
-
+        Pane root = new Pane();
+        Scene scene = new Scene(root);
         Map<String, Double> map = excelReader.getPieChartData(repo);
         pieChart.setLabelLineLength(10);
-        pieChart.setLegendSide(Side.LEFT);
+        pieChart.setLegendSide(Side.BOTTOM);
 
         ObservableList<PieChart.Data> pieChartData
                 = FXCollections.observableArrayList(
@@ -99,23 +101,37 @@ public class PieChartController implements Initializable {
         pieChart.setData(pieChartData);
     }
 }
+         
+         
+         
+    /*final PieChart pieChart = new PieChart(pieChartData);
+        
+        final Label caption = new Label("");
+        caption.setTextFill(Color.DARKORANGE);
+        caption.setStyle("-fx-font: 24 arial;");
+         
+         
+        for (final PieChart.Data data : pieChart.getData()) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+                    new EventHandler<MouseEvent>() {
+                        @Override public void handle(MouseEvent e) {
+                            caption.setTranslateX(e.getSceneX());
+                            caption.setTranslateY(e.getSceneY());
+                            caption.setText(String.valueOf(data.getPieValue()) 
+                                + "%");
+                            
+                        }
+                    });
+           
+        }
+         
+         
+        //root.getChildren().addAll(pieChart, caption); 
+       }
+        }*/
 
-/*
- final Label caption = new Label("");
- caption.setTextFill(Color.BLACK);
- caption.setStyle("-fx-font: 24 arial;");
-
-  
-          
- for (final PieChart.Data data : pieChart.getData()); {
- data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
- new EventHandler<MouseEvent>() {
- @Override public void handle(MouseEvent e) {
- caption.setTranslateX(e.getSceneX());
- caption.setTranslateY(e.getSceneY());
- caption.setText(String.valueOf(data.getPieValue()) + "%");
-             
- });
- }
- }          
- */
+ 
+         
+         
+        
+        

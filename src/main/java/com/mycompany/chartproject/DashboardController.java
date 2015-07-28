@@ -5,11 +5,10 @@
  */
 package com.mycompany.chartproject;
 
-import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
-import static javafx.application.Application.launch;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -17,30 +16,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Side;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+
 /**
  *
  * @author eaoicon
  */
 public class DashboardController implements Initializable {
 
-    
-    
     @FXML
     private Label X;
     @FXML
@@ -59,154 +48,174 @@ public class DashboardController implements Initializable {
     @FXML
     private Label plus;
 
-    @FXML 
-    private TableColumn xColumn;
-    @FXML 
-    private TableColumn yColumn;
-    
-        
     @FXML
-    private LineChart<String,Number> graph;
+    private TableColumn xColumn;
+    @FXML
+    private TableColumn yColumn;
+
+    @FXML
+    private LineChart<String, Number> graph;
     @FXML
     private PieChart pieChart;
     private Object root;
     private Object data;
-  
- 
-    
-        
+    ExcelReader excelReader = new ExcelReader();
 
-     /*   int xCoef = Integer.parseInt(enterX.getText());
-        int c = Integer.parseInt(C.getText());
-
-        System.out.println("X: " + enterX.getText());
-        System.out.println("C: " + C.getText());
-       
-        XYChart.Series series = new XYChart.Series<>();
-         series.setName("My Points");
-        
- 
-        for (int x = 0; x <= 10; x++) {
-            int y = xCoef * x + c;
-         
-            System.out.println("( " + x + ", " + y + ")");
-            
-            series.getData().add(new XYChart.Data(x, y));
-         xColumn.setCellValueFactory(new PropertyValueFactory("xValues"));
- yColumn.setCellValueFactory(new PropertyValueFactory("yValues"));
-           
+    @FXML
+    private Button wfmac;
+    @FXML
+    private Button servcore;
+    @FXML
+    private Button wfmsr;
+    @FXML
+    private Button modelmsr;
+    @FXML
+    private Button failedBtn;
+     @FXML
+    private Button passedBtn;
+      @FXML
+    private Button skippedBtn;
+       @FXML
+    private Button totalBtn;
     
-            
-             //table.setText(String.valueOf("( " + x + ", " + y + ")")); */
-        @FXML
-    private void handleButtonAction(ActionEvent event) {
-        
-        final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Month");       
-        
-        final LineChart<String,Number> lineChart = 
-                new LineChart<String,Number>(xAxis,yAxis);
-  
-    XYChart.Series series1 = new XYChart.Series();
-        series1.setName ("Tests Failed"); 
-        series1.getData().add(new XYChart.Data("Jan", 23));
-        series1.getData().add(new XYChart.Data("Feb", 14));
-        series1.getData().add(new XYChart.Data("Mar", 15));
-        series1.getData().add(new XYChart.Data("Apr", 24));
-        series1.getData().add(new XYChart.Data("May", 34));
-        series1.getData().add(new XYChart.Data("Jun", 36));
-        series1.getData().add(new XYChart.Data("Jul", 22));
-        series1.getData().add(new XYChart.Data("Aug", 45));
-        series1.getData().add(new XYChart.Data("Sep", 43));
-        series1.getData().add(new XYChart.Data("Oct", 17));
-        series1.getData().add(new XYChart.Data("Nov", 29));
-        series1.getData().add(new XYChart.Data("Dec", 25));
-        
-      XYChart.Series series2 = new XYChart.Series();
-        series2.setName ("Tests Unstable");
-        series2.getData().add(new XYChart.Data("Jan", 11));
-        series2.getData().add(new XYChart.Data("Feb", 10));
-        series2.getData().add(new XYChart.Data("Mar", 5));
-        series2.getData().add(new XYChart.Data("Apr", 2));
-        series2.getData().add(new XYChart.Data("May", 8));
-        series2.getData().add(new XYChart.Data("Jun", 3));
-        series2.getData().add(new XYChart.Data("Jul", 2));
-        series2.getData().add(new XYChart.Data("Aug", 4));
-        series2.getData().add(new XYChart.Data("Sep", 4));
-        series2.getData().add(new XYChart.Data("Oct", 1));
-        series2.getData().add(new XYChart.Data("Nov", 9));
-        series2.getData().add(new XYChart.Data("Dec", 5));
-        
-        
-        
-             
-      XYChart.Series series3 = new XYChart.Series();
-        series3.setName ("Tests Passed");
-        series3.getData().add(new XYChart.Data("Jan", 30));
-        series3.getData().add(new XYChart.Data("Feb", 23));
-        series3.getData().add(new XYChart.Data("Mar", 16));
-        series3.getData().add(new XYChart.Data("Apr", 29));
-        series3.getData().add(new XYChart.Data("May", 39));
-        series3.getData().add(new XYChart.Data("Jun", 40));
-        series3.getData().add(new XYChart.Data("Jul", 27));
-        series3.getData().add(new XYChart.Data("Aug", 54));
-        series3.getData().add(new XYChart.Data("Sep", 50));
-        series3.getData().add(new XYChart.Data("Oct", 39));
-        series3.getData().add(new XYChart.Data("Nov", 38));
-        series3.getData().add(new XYChart.Data("Dec", 29));
-       
-        graph.getData().addAll(series1,series2,series3);
-      
-      
+
+    private XYChart.Series failed;
+     private XYChart.Series passed;
+      private XYChart.Series skipped;
+       private XYChart.Series total;
+
+    /* @FXML
+     private Label green;
+     @FXML
+     private Label orange;
+     @FXML
+     private Label red;
+     */
+    //method linked to the view
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        setPieChartData("apworkflowmacro_acceptance");
+        setChartData("apworkflowmacro_acceptance");
+
     }
 
- 
+    @FXML
+    public void handleRepoChange1() {
 
+        setPieChartData("apworkflowmacro_acceptance");
+        setChartData("apworkflowmacro_acceptance");
 
-  
+    }
 
-    
-  
-  
-    
-    
-  /* @FXML
-   private Label green;
-   @FXML
-   private Label orange;
-   @FXML
-   private Label red;
-   */
-       @Override
-public void initialize(URL url, ResourceBundle rb) {
+    @FXML
+    public void handleRepoChange2() {
 
+        setPieChartData("apservicecore_acceptance");
+        setChartData("apservicecore_acceptance");
+
+    }
+
+    @FXML
+    public void handleFailed() {
+        if(graph.getData().contains(failed)){
+           graph.getData().remove(failed); 
+        }else{
+            graph.getData().add(failed);
+     
+        }
         
-pieChart.setLabelLineLength(10);
-pieChart.setLegendSide(Side.LEFT);
-
- ObservableList<PieChart.Data> pieChartData =
-         
-            FXCollections.observableArrayList (
-            new PieChart.Data("Failed 40.62%", 0.4062),
-            new PieChart.Data("Unstable 7.95%", 0.0795),
-            new PieChart.Data("Passed 51.42%", 0.5142));
- 
- 
+    }
+    @FXML
+    public void handleSkipped() {
+        if(graph.getData().contains(skipped)){
+           graph.getData().remove(skipped); 
+        }else{
+            graph.getData().add(skipped);
+     
+        }
+        
+    }
+    @FXML
+    public void handlePassed() {
+        if(graph.getData().contains(passed)){
+           graph.getData().remove(passed); 
+        }else{
+            graph.getData().add(passed);
+     
+        }
+        
+    }
     
-    pieChart.setData(pieChartData); 
+    @FXML
+    public void handleTotal() {
+        if(graph.getData().contains(total)){
+           graph.getData().remove(total); 
+        }else{
+            graph.getData().add(total);
+     
+        }
+        
+    }
+
+    /* @FXML 
+     public void handleRepoChange3 () {
+
+     setPieChartData("ap-workflow-msrbsv1_acceptance");
+    
+     }
+     @FXML 
+     public void handleRepoChange4 () {
+
+     setPieChartData("ap-model-msrbsv1_acceptance");
+    
+     }  */
+    private void setPieChartData(String repo) {
+        // TODO
+
+        Pane root = new Pane();
+        Scene scene = new Scene(root);
+        Map<String, Double> map = excelReader.getPieChartData(repo);
+        pieChart.setLabelLineLength(10);
+        pieChart.setLegendSide(Side.LEFT);
+
+        ObservableList<PieChart.Data> pieChartData
+                = FXCollections.observableArrayList(
+                        new PieChart.Data("Failed ", +map.get("Failed")),
+                        new PieChart.Data("Unstable ", +map.get("Unstable")),
+                        new PieChart.Data("Passed ", +map.get("Passed")),
+                        new PieChart.Data("Aborted ", +map.get("Aborted")));
+
+        pieChart.setData(pieChartData);
+    }
+
+    private void setChartData(String repo) {
+        graph.getData().clear();
+        total = new XYChart.Series();
+        total.setName("Total Tests");
+//        ObservableList<XYChart.Series> totalData
+//                = FXCollections.observableArrayList();
+        passed = new XYChart.Series();
+        passed.setName("Tests Passed");
+        failed = new XYChart.Series();
+        failed.setName("Tests Failed");
+        skipped = new XYChart.Series();
+        skipped.setName("Tests Skipped");
+      
+
+        List<ChartSeries> cs = excelReader.getSeriesChartData(repo);
+        cs.stream().forEach(chartSeries -> {
+            System.out.println("date: " + chartSeries.getDate() + ", " + chartSeries.getTotal());
+            total.getData().add(new XYChart.Data(chartSeries.getDate(), chartSeries.getTotal()));
+            passed.getData().add(new XYChart.Data(chartSeries.getDate(), chartSeries.getPassed()));
+            failed.getData().add(new XYChart.Data(chartSeries.getDate(), chartSeries.getFailed()));
+            skipped.getData().add(new XYChart.Data(chartSeries.getDate(), chartSeries.getSkipped()));
+        });
+
+        graph.getData().addAll(failed);
+        graph.getData().addAll(skipped);
+        graph.getData().addAll(passed);
+        graph.getData().addAll(total);
+
+    }
+
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
- 

@@ -10,8 +10,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -30,6 +32,8 @@ public class ExcelReader {
         try {
             String fileName = "src/main/resources/Stabilityfinal.xlsx";
             String test = fileName;
+            //String fileName2 = "src/main/resources/Series.xlsx";
+            //String test2 = fileName2;
             FileInputStream file = new FileInputStream(new File(test));
 
             //Get the workbook instance for XLS file 
@@ -37,12 +41,6 @@ public class ExcelReader {
 
             //Get first sheet from the workbook
             XSSFSheet sheet = workbook.getSheet(repo);
-//workbook.getSheetAt(0);
-            
-            workbook.getSheet("apworkflowmacro_acceptance");
-            workbook.getSheet("apservicecore_acceptance");
-//            workbook.getSheet("ap-workflow-msrbsv1_acceptance");
-//            workbook.getSheet("ap-model-msrbsv1_acceptance");
 
             //Iterate through each rows from first sheet
             Iterator<Row> rowIterator = sheet.iterator();
@@ -50,7 +48,7 @@ public class ExcelReader {
             int success = 0;
             int failure = 0;
             int unstable = 0;
-            int aborted =0 ;
+            int aborted = 0;
 
             while (rowIterator.hasNext()) {
                 ++total;
@@ -90,7 +88,7 @@ public class ExcelReader {
                             } else if (cell.getStringCellValue().equalsIgnoreCase("ABORTED")) {
                                 ++aborted;
                             }
-                                System.out.print(cell.getStringCellValue() + "\t\t");
+                            System.out.print(cell.getStringCellValue() + "\t\t");
                             break;
 
                     }
@@ -119,26 +117,164 @@ public class ExcelReader {
             int orange = ((unstable * 100 / total));
             double unstablePercentage = (double) orange / 100;
             System.out.println("Unstable: " + unstablePercentage);
-            
-           int abort = ((aborted*100/total));
-           double abortedPercentage = (double) abort /100;
-           System.out.println("Aborted: " + abortedPercentage);
+
+            int abort = ((aborted * 100 / total));
+            double abortedPercentage = (double) abort / 100;
+            System.out.println("Aborted: " + abortedPercentage);
 
             map.put("Failed", failedPercentage);
-            
-            map.put("Unstable",unstablePercentage);
-            
+
+            map.put("Unstable", unstablePercentage);
+
             map.put("Passed", passedPercentage);
-            
-           map.put("Aborted", abortedPercentage);
-            
+
+            map.put("Aborted", abortedPercentage);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-                }
-        return map;
-    
-            }
         }
-   
+        return map;
+
+    }
+
+    public List<ChartSeries> getSeriesChartData(String repo) {
+        List<ChartSeries> cs = new ArrayList<>();
+        try {
+            String fileName = "src/main/resources/Series.xlsx";
+            String test = fileName;
+            //String fileName2 = "src/main/resources/Series.xlsx";
+            //String test2 = fileName2;
+            FileInputStream file = new FileInputStream(new File(test));
+
+            //Get the workbook instance for XLS file 
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+            //Get first sheet from the workbook
+            XSSFSheet sheet = workbook.getSheet(repo);
+
+            //Iterate through each rows from first sheet
+            Iterator<Row> rowIterator = sheet.iterator();
+        
+            ChartSeries chartSeries = null;
+            while (rowIterator.hasNext()) {
+                chartSeries = new ChartSeries();
+                
+                Row row = rowIterator.next();
+                if (row.getRowNum()==0){
+                   row = rowIterator.next();
+                }
+
+                //For each row, iterate through each columns
+                Iterator<Cell> cellIterator = row.cellIterator();
+
+                while (cellIterator.hasNext()) {
+
+                    Cell cell = cellIterator.next();
+
+                    switch (cell.getCellType()) {
+
+                        case Cell.CELL_TYPE_NUMERIC:
+                            //System.out.println("numeric");
+                            switch (cell.getColumnIndex()) {
+                                case 1:
+                                    chartSeries.setTotal((int)cell.getNumericCellValue());
+                                    break;
+                                case 2:
+                                    chartSeries.setPassed((int)cell.getNumericCellValue());
+                                    break;
+                                case 3:
+                                    chartSeries.setFailed((int)cell.getNumericCellValue());
+                                    break;
+                                case 4:
+                                    chartSeries.setSkipped((int)cell.getNumericCellValue());
+                                    break;
+                            }
+
+                            System.out.println(cell.getDateCellValue() + "\t\t");
+                            System.out.print(cell.getNumericCellValue() + "\t\t");
+
+                            break;
+                        case Cell.CELL_TYPE_BOOLEAN:
+                            System.out.print(cell.getBooleanCellValue() + "\t\t");
+                            break;
+
+                        case Cell.CELL_TYPE_STRING:
+                            
+                           chartSeries.setDate(cell.getStringCellValue());
+                           System.out.print(cell.getStringCellValue() + "\t\t");
+                            break;
+
+                    }
+                }
+                System.out.println("");
+                cs.add(chartSeries);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cs;
+
+    }
+}
+
+class ChartSeries {
+
+    private String date;
+    private int total, passed, failed, skipped;
+
+    public ChartSeries() {
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getPassed() {
+        return passed;
+    }
+
+    public void setPassed(int passed) {
+        this.passed = passed;
+    }
+
+    public int getFailed() {
+        return failed;
+    }
+
+    public void setFailed(int failed) {
+        this.failed = failed;
+    }
+
+    public int getSkipped() {
+        return skipped;
+    }
+
+    public void setSkipped(int skipped) {
+        this.skipped = skipped;
+    }
+
+    @Override
+    public String toString() {
+        return "ChartSeries{" + "date=" + date + ", total=" + total + ", passed=" + passed + ", failed=" + failed + ", skipped=" + skipped + '}';
+    }
+
+}
+

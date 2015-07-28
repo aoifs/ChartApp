@@ -17,8 +17,8 @@
    <bottom>
       <HBox prefHeight="26.0" prefWidth="587.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="wfmac" mnemonicParsing="false" onAction="#handleRepoChange1" prefHeight="25.0" prefWidth="299.0" text="apWorkflowMacro" textFill="#121fd3" />
-            <Button fx:id="servcore" mnemonicParsing="false" onAction="#handleRepoChange2" prefHeight="25.0" prefWidth="300.0" text="apServiceCore" textFill="#0a1ef5" />
+            <Button fx:id="wfmac" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleRepoChange1" prefHeight="25.0" prefWidth="640.0" text="apWorkflowMacro" textFill="#121fd3" />
+            <Button fx:id="servcore" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleRepoChange2" prefHeight="25.0" prefWidth="678.0" text="apServiceCore" textFill="#0a1ef5" />
 <!--            <Button fx:id="wfmsr" mnemonicParsing="false" onAction="#handleRepoChange3" prefHeight="25.0" prefWidth="150.0" text="apWorkflow-msrbsv1" textFill="#2912bf" />
             <Button fx:id="modelmsr" mnemonicParsing="false" onAction="#handleRepoChange4" prefHeight="25.0" prefWidth="151.0" text="apModel-msrbsv1" textFill="#480be3" />-->
          </children>

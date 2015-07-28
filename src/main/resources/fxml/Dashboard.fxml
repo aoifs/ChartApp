@@ -24,18 +24,22 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <HBox alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="500.0" prefHeight="188.0" prefWidth="134.0">
+                  <HBox alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="500.0" prefHeight="188.0" prefWidth="134.0" />
+                  <VBox layoutX="650.0" layoutY="399.0" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="53.0" text="Plot" textFill="#1e21dd" />
-                     </children></HBox>
+                        <Button fx:id="failedBtn" mnemonicParsing="false" onAction="#handleFailed" prefHeight="29.0" prefWidth="90.0" text="Failed" textFill="#fc0909" />
+                        <Button fx:id="skippedBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSkipped" prefHeight="29.0" prefWidth="90.0" text="Skipped" textFill="#e5930e" />
+                        <Button fx:id="passedBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePassed" prefHeight="29.0" prefWidth="90.0" text="Passed" textFill="#13dd0c" />
+                        <Button fx:id="totalBtn" mnemonicParsing="false" onAction="#handleTotal" prefHeight="29.0" prefWidth="90.0" text="Total Tests" textFill="#5517a8" />
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="0.0">
                <children>
                   <PieChart fx:id="pieChart" prefHeight="880.0" prefWidth="600.0" />
-                  <Button layoutX="200.0" layoutY="600.0" mnemonicParsing="false" text="Repo1" textFill="#bc37c6" />
-                  <Button layoutX="300.0" layoutY="600.0" mnemonicParsing="false" text="Repo2" textFill="#e12470" />
-                  <Button layoutX="400.0" layoutY="600.0" mnemonicParsing="false" text="Repo3" textFill="#0ecfb9" />
+                  <Button fx:id="wfmac" layoutX="180.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleRepoChange1" text="apWorkflowMacro" textFill="#bc37c6" />
+                  <Button fx:id="servcore" layoutX="350.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleRepoChange2" prefHeight="25.0" prefWidth="114.0" text="apServiceCore" textFill="#e12470" />
                </children>
             </AnchorPane>
         </items>
